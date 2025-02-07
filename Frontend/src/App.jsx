@@ -6,7 +6,10 @@ function App() {
    
     
         <div className="p-6">
+
           <Member />
+
+
         </div>
       );
     }

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Layout, LayoutGrid, Search, Edit3, LogOut } from 'lucide-react';
+
 import LeftSidebar from "../components/LeftSidebar";
 
 const MemberProfile = () => {
