@@ -1,4 +1,4 @@
-import HR from "./pages/HR";
+import Dashboard from "./pages/Dashboard";
 import Events from "./pages/Events";
 import Member from "./pages/Member";
 function App() {
@@ -7,7 +7,7 @@ function App() {
     
         <div className="p-6">
 
-          <Member />
+          <Dashboard />
 
 
         </div>

@@ -15,13 +15,14 @@ function HR() {
   <div className="p-6 max-w-6xl mx-auto space-y-8">
     <LeftSidebar />
 
-      
+    <div className="flex-1 ml-16 p-6">
       <h2 className="text-2xl text-white-600 font-bold text-left w-full">
         HR OVERVIEW
       </h2>
-      <button onClick={()=> setisOpen(true)}>ADD</button>
+     <LeaderBoard />
+     <MemberList />
       
-      {isOpen && <AddNewForm onClose={()=> setisOpen(false)}/>}
+      </div>
 
     </div>
   );
