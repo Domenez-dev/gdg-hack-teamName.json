@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import AdminLoginView, AdminLogoutView
+from .views import discord_login, discord_login_redirect, discord_logout
+
+app_name = 'discord'
 
 urlpatterns = [
-    path('login/', AdminLoginView.as_view(), name='api-login'),
-    path('logout/', AdminLogoutView.as_view(), name='api-logout'),
+    path('login/', discord_login, name='discord-login'),
+    path('redirect/', discord_login_redirect, name='discord-login-redirect'),
+    path('logout/', discord_logout, name='discord-logout'),
 ]
