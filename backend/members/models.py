@@ -13,3 +13,8 @@ class Member(models.Model):
     def __str__(self):
         return str(self.name)
 
+class Badge(models.Model):
+    id = models.AutoField(models.Model, primary_key=True)
+    name = models.CharField(max_length=255)
+    member_id = models.ForeignKey(Member, on_delete=models.CASCADE)
+    
