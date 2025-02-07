@@ -22,8 +22,10 @@ function MemberList() {
   });
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Member's List</h2>
+    <div className="p-6 max-w-8xl mx-auto  ">
+      <h2 className="text-2xl text-left italic mb-4 ">Member's List</h2>
+
+ 
       <div className="space-y-2">
         {/* HEADER */}
         <div className="grid grid-cols-6 font-semibold text-gray-600 text-sm py-2 border-b">
