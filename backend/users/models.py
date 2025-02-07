@@ -3,13 +3,10 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission
 from django.utils import timezone
 
 
-class Department(models.TextChoices):
-    HR = 'HR', 'Human Resources'
-    DEVELOPMENT = 'DEV', 'Development'
-    COMMUNICATION = 'COM', 'Communication'
-    VISUALS = 'VIS', 'visuals'
-    LOGISTICS = 'LOG', 'Logistics'
-    EXTERNAL_RELATIONS = 'RLX', 'External Relations'
+class Department(models.Model):
+    id = models.CharField(max_length=10, primary_key=True)  # e.g., 'DEV'
+    name = models.CharField(max_length=100)  # e.g., 'Development'
+
 
 class UserSession(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
@@ -35,7 +32,6 @@ class DiscordUser(models.Model):
 
     def __str__(self):
         return str(self.username)
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, discord_id, name, department,password=None):
@@ -67,10 +63,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=255)
     discord_id = models.CharField(max_length=255, unique=True)
-    department = models.CharField(
-        max_length=3,
-        choices=Department.choices,
-    )
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -84,7 +77,7 @@ class CustomUser(AbstractUser):
 
     @property
     def is_staff(self):
-        return self.is_admin or self.department == Department.HR
+        return self.is_admin or self.department.id == Department.HR
 
     groups = models.ManyToManyField(
         Group,
