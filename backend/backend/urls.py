@@ -20,6 +20,6 @@ from django.urls.conf import include
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('admin/', include('users.urls')), # Include the users app urls
+    path('api/discord/', include('users.urls')), # Include the users app urls
     path('api/', include('feedback.urls')), # Include the users app urls
 ]
