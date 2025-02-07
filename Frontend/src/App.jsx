@@ -7,7 +7,7 @@ function App() {
    
     
         <div className="p-6">
-          <LoginPage/>
+          <Events/>
         </div>
       );
     }
