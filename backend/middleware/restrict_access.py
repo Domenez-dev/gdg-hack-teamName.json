@@ -18,13 +18,13 @@ from users.models import CustomUserManager, Department
 #         return self.get_response(request)
 
 
-class HRAdminMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
+# class HRAdminMiddleware:
+#     def __init__(self, get_response):
+#         self.get_response = get_response
 
-    def __call__(self, request):
-        if request.user.is_authenticated and request.user.departement == Department.HR:
-            request.user.is_admin = True
-            request.user.save()
-        return self.get_response(request)
+#     def __call__(self, request):
+#         if request.user.is_authenticated and request.user.departement == Department.HR:
+#             request.user.is_admin = True
+#             request.user.save()
+#         return self.get_response(request)
 

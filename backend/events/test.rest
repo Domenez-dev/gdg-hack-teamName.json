@@ -6,17 +6,17 @@ Content-Type: application/json
   "event_name": "Sample Event",
   "event_start_date": "2023-10-01T10:00:00Z",
   "event_end_date": "2023-10-01T12:00:00Z",
-  "event_description": "This is a sample event."
+  "event_description": "This is a sample event.",
+  "departments": ["DEV"]
 }
 
 ### Get all events
-GET http://localhost:8000/api/events/
+GET http://localhost:8000/api/departements/
 Content-Type: application/json
 
 ### Get a specific event by ID
 GET http://localhost:8000/api/events/1/
 Content-Type: application/json
-
 
 ### Update an existing event
 PUT http://localhost:8000/api/events/1/
@@ -29,3 +29,6 @@ Content-Type: application/json
   "event_description": "This is an updated event description."
 }
 
+### Delete an event
+DELETE http://localhost:8000/api/events/1/
+Content-Type: application/json

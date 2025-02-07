@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     #'middleware.restrict_access.AdminAuthMiddleware', # Access restriction middleware
-    'middleware.restrict_access.HRAdminMiddleware', # Access restriction middleware
+    # 'middleware.restrict_access.HRAdminMiddleware', # Access restriction middleware
 ]
 
 ROOT_URLCONF = 'backend.urls'

@@ -1,7 +1,12 @@
-from rest_framework import viewsets
-from .models import Event
-from .serializers import EventSerializer
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import EventViewSet, ContributionViewSet,DepartementsViewSet
 
-class EventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
+router = DefaultRouter()
+router.register(r'events', EventViewSet)
+router.register(r'contributions', ContributionViewSet)
+router.register(r'departements', DepartementsViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
