@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'discord_integration.auth.DiscordBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
