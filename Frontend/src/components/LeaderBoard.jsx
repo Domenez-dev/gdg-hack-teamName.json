@@ -43,7 +43,12 @@ const LeaderBoard = () => {
   ];
 
   return (
-    <div className="flex gap-8 p-6 bg-white rounded-lg shadow-lg">
+    <div className="flex gap-8 p-6 bg-white rounded-lg shadow-lg mb-5">
+    
+ <div className="flex gap-8 p-6 bg-white rounded-lg shadow-lg">
+  {/* HR OVERVIEW - Prend toute la largeur */}
+ 
+    
       <div className="flex gap-4">
         {leaders.map((leader, index) => (
           <div key={leader.id} className={`relative w-48 p-4 rounded-lg ${leader.bgColor}`}>
@@ -108,6 +113,7 @@ const LeaderBoard = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

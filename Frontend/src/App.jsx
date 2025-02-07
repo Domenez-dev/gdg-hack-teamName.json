@@ -1,11 +1,14 @@
 import './App.css'
-// import LeaderBoard from './components/LeaderBoard.jsx' ;
-import Login from './pages/Login.jsx';
-
+import HR from "./pages/HR";
 function App() {
   return (
-    <Login/>
-  )
-}
-
-export default App
+   
+    
+        <div className="p-6">
+          <HR />
+        </div>
+      );
+    }
+    
+    
+    export default App
