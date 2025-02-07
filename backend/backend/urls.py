@@ -22,4 +22,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('admin/', include('users.urls')), # Include the users app urls
     path('api/', include('feedback.urls')), # Include the users app urls
+    path('api/', include('events.urls')), # Include the users app urls
 ]
