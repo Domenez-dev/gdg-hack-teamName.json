@@ -1,13 +1,13 @@
 import LeaderBoard from "../components/LeaderBoard";
 import MemberList from "../components/Member-list";
+import LeftSidebar from "../components/LeftSidebar";  
 
 
 
 
-import LeftSidebar from "../components/LeftSidebar";
-
-function Dashboard() {
+function Dashboard () {
   
+
 
   return (
 
@@ -26,4 +26,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Dashboard; 
