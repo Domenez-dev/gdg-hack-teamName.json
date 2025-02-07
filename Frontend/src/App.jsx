@@ -1,11 +1,10 @@
 import './App.css'
-import LeaderBoard from './components/leaderBoard' 
+// import LeaderBoard from './components/LeaderBoard.jsx' ;
+import Login from './pages/Login.jsx';
 
 function App() {
   return (
-    <LeaderBoard
-    
-    />
+    <Login/>
   )
 }
 
