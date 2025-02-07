@@ -1,18 +1,37 @@
 from django.db import models
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission, Group
+from django.utils import timezone
 
 
-class Department(models.TextChoices):
-    HR = 'HR', 'Human Resources'
-    DEVELOPMENT = 'DEV', 'Development'
-    COMMUNICATION = 'COM', 'Communication'
-    VISUALS = 'VIS', 'visuals'
-    LOGISTICS = 'LOG', 'Logistics'
-    EXTERNAL_RELATIONS = 'RLX', 'External Relations'
+class Department(models.Model):
+    id = models.CharField(max_length=10, primary_key=True)  # e.g., 'DEV'
+    name = models.CharField(max_length=100)  # e.g., 'Development'
 
+
+class UserSession(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    session_key = models.CharField(max_length=40, unique=True)
+    login_time = models.DateTimeField(default=timezone.now)
+    logout_time = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.user.name} - {self.session_key}"
+
+
+class DiscordUser(models.Model):
+    id = models.CharField(max_length=50, primary_key=True)
+    username = models.CharField(max_length=50)
+    discriminator = models.CharField(max_length=4)
+    avatar = models.CharField(max_length=100)
+    email = models.EmailField()
+    verified = models.BooleanField()
+    mfa_enabled = models.BooleanField()
+    flags = models.IntegerField()
+    public_flags = models.IntegerField()
+
+    def __str__(self):
+        return str(self.username)
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, discord_id, name, department,password=None):
@@ -44,10 +63,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=255)
     discord_id = models.CharField(max_length=255, unique=True)
-    department = models.CharField(
-        max_length=3,
-        choices=Department.choices,
-    )
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -61,7 +77,7 @@ class CustomUser(AbstractUser):
 
     @property
     def is_staff(self):
-        return self.is_admin or self.department == Department.HR
+        return self.is_admin or self.department.id == Department.HR
 
     groups = models.ManyToManyField(
         Group,
