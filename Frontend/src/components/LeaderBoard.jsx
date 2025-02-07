@@ -43,9 +43,9 @@ const LeaderBoard = () => {
   ];
 
   return (
-    <div className="flex gap-8 p-6 bg-white rounded-lg shadow-lg mb-5">
+    <div className="flex gap-8 p-6  mb-5">
     
- <div className="flex gap-8 p-6 bg-white rounded-lg shadow-lg">
+ <div className="flex gap-8 p-6 rounded-lg shadow-lg">
   {/* HR OVERVIEW - Prend toute la largeur */}
  
     
@@ -56,7 +56,7 @@ const LeaderBoard = () => {
               #{index + 1}
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="p-2 bg-white rounded-full">
+              <div className="p-2  rounded-full">
               <img src={`https://robohash.org/${leader.username}.png`} alt={leader.username} className="w-12 h-12 rounded-full" />
 
               </div>
@@ -105,7 +105,7 @@ const LeaderBoard = () => {
             <span>Inactive</span>
           </div>
           <div className="w-full h-2 bg-gray-700 rounded-full mt-2">
-            <div className="w-3/5 h-full bg-white rounded-full"></div>
+            <div className="w-3/5 h-full  rounded-full"></div>
           </div>
           <div className="flex justify-between text-sm mt-1">
             <span>58%</span>

@@ -1,4 +1,3 @@
-import './App.css'
 import HR from "./pages/HR";
 function App() {
   return (
