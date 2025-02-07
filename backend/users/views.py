@@ -5,8 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-
-
 class AdminLoginView(APIView):
     def post(self, request):
         username = request.data.get('username')

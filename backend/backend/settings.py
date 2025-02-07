@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'middleware.restrict_access.AdminAuthMiddleware', # Access restriction middleware
+    #'middleware.restrict_access.AdminAuthMiddleware', # Access restriction middleware
     'middleware.restrict_access.HRAdminMiddleware', # Access restriction middleware
 ]
 
