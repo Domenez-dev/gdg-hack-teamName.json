@@ -22,7 +22,6 @@ def session_exempt(view_func):
     return _wrapped_view
 
 
-
 def session_exists(session_key):
     return Session.objects.filter(session_key=session_key).exists()
 
