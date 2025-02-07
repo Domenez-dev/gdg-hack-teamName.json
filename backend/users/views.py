@@ -1,9 +1,16 @@
 from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.utils import timezone
+from .models import UserSession
 from django.conf import settings
 from django.http import JsonResponse
 from django.contrib.auth import login
 from .models import CustomUser
 import requests
+from django.contrib.sessions.models import Session
+
+def session_exists(session_key):
+    return Session.objects.filter(session_key=session_key).exists()
 
 def discord_login(request):
     return redirect(settings.DISCORD_LOGIN_URL)
@@ -74,8 +81,23 @@ def discord_login_redirect(request):
         }
     )
 
+    discord_logout(request)
+
     # Log the user in
     login(request, user)
+
+    session_key = request.session.session_key
+    if not session_key:
+        request.session.create()
+        session_key = request.session.session_key
+
+    UserSession.objects.create(
+        user=user,
+        session_key=session_key,
+        is_active= True,
+        login_time= timezone.now(),
+        logout_time= None
+    )
     
     return JsonResponse({'message': 'Logged in successfully', 'user': {
         'name': user.name,
@@ -83,3 +105,14 @@ def discord_login_redirect(request):
         'is_admin': user.is_admin
     }})
 
+
+def discord_logout(request):
+    session_key = request.session.session_key
+    if session_key:
+        UserSession.objects.filter(session_key=session_key).update(
+            logout_time=timezone.now(),
+            is_active=False
+        )
+
+    logout(request)
+    return JsonResponse({'message': 'Logged out successfully'})

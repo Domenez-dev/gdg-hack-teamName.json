@@ -22,5 +22,4 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('api/discord/', include('users.urls')), # Include the users app urls
     path('api/', include('feedback.urls')), # Include the users app urls
-    # path('api/discord/', include('discord_integration.urls')), # Include the discord_integration app urls
 ]

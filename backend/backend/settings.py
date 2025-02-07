@@ -26,6 +26,11 @@ DISCORD_SERVER_ID=os.getenv('DISCORD_SERVER_ID')
 
 DISCORD_ROLE_ID=os.getenv('DISCORD_ROLE_ID')
 
+# Session settings to last for 1 week
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 7 days in seconds
+SESSION_SAVE_EVERY_REQUEST = True  # Extend session with each request
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Don't expire on browser close
+
 load_dotenv()
 
 # Quick-start development settings - unsuitable for production
