@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'analytics',
-    'discord-integration',
+    'discord_integration',
     'feedback',
+    'users',
 ]
 
 MIDDLEWARE = [
