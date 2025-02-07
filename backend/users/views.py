@@ -9,12 +9,28 @@ from .models import CustomUser
 import requests
 from django.contrib.sessions.models import Session
 
+# Decorator to exclude the login function from the middlware logic 
+from functools import wraps
+
+def session_exempt(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        return view_func(request, *args, **kwargs)
+    
+    # Add a custom attribute to mark the view as exempt
+    _wrapped_view.session_exempt = True
+    return _wrapped_view
+
+
+
 def session_exists(session_key):
     return Session.objects.filter(session_key=session_key).exists()
 
+@session_exempt
 def discord_login(request):
     return redirect(settings.DISCORD_LOGIN_URL)
 
+@session_exempt
 def discord_login_redirect(request):
     code = request.GET.get('code')
     
@@ -86,18 +102,25 @@ def discord_login_redirect(request):
     # Log the user in
     login(request, user)
 
-    session_key = request.session.session_key
-    if not session_key:
-        request.session.create()
-        session_key = request.session.session_key
+    # Ensure session is saved after login
+    if not request.session.session_key:
+        request.session.save()  # This ensures the session is stored in the database
 
+    session_key = request.session.session_key
+    print(f"Session Key After Login: {session_key}")
+
+    # Save the session in UserSession model
     UserSession.objects.create(
         user=user,
         session_key=session_key,
-        is_active= True,
-        login_time= timezone.now(),
-        logout_time= None
+        is_active=True,
+        login_time=timezone.now(),
+        logout_time=None
     )
+
+    print(f"Session Key: {request.session.session_key}")
+    print(f"Session Data: {request.session.items()}")
+
     
     return JsonResponse({'message': 'Logged in successfully', 'user': {
         'name': user.name,

@@ -1,30 +1,26 @@
-from django.http import JsonResponse
 
-from users.models import Department
+from django.shortcuts import redirect
+from django.urls import reverse
 
-# class AdminAuthMiddleware:
-#     def __init__(self, get_response):
-#         self.get_response = get_response
-
-#     def __call__(self, request):
-#         # Allow login/logout endpoints without authentication
-#         if request.path.startswith('/admin/login') or request.path.startswith('/admin/logout'):
-#             return self.get_response(request)
-
-#         # Restrict other endpoints to authenticated admin users
-#         if not request.user.is_authenticated or not request.user.is_staff:
-#             return JsonResponse({"error": "Unauthorized - Admins only"}, status=401)
-
-#         return self.get_response(request)
-
-
-class HRAdminMiddleware:
+class SessionCheckMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
-        if request.user.is_authenticated and request.user.departement == Department.HR:
-            request.user.is_admin = True
-            request.user.save()
+        # Skip session check for login URL
+        if request.path == reverse('discord:discord-login'):
+            return self.get_response(request)
+
+        # Check for '_auth_user_id' in session data
+        if '_auth_user_id' not in request.session:
+            print("Session Key Missing: Redirecting to login")
+            return redirect(reverse('discord:discord-login'))
+
+        # Optionally, check backend to ensure it's from Discord
+        if request.session.get('_auth_user_backend') != 'users.auth.DiscordBackend':
+            print("Incorrect Backend: Redirecting to login")
+            return redirect(reverse('discord:discord-login'))
+
+        # Proceed if session is valid
         return self.get_response(request)
 

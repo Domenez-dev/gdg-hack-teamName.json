@@ -31,6 +31,9 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 7 days in seconds
 SESSION_SAVE_EVERY_REQUEST = True  # Extend session with each request
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Don't expire on browser close
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_NAME = 'session'
+
 load_dotenv()
 
 # Quick-start development settings - unsuitable for production
@@ -77,7 +80,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'middleware.restrict_access.HRAdminMiddleware', # Access restriction middleware
+    'middleware.restrict_access.SessionCheckMiddleware', # Access restriction middleware
 ]
 
 ROOT_URLCONF = 'backend.urls'
