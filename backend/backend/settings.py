@@ -17,6 +17,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 CREDENTIALS_FILE = BASE_DIR / 'credentials.json'
+DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI') # Discord redirect URI
+DISCORD_LOGIN_URL = os.getenv('DISCORD_URL') # Discord API URL
+DISCORD_CLIENT_ID=os.getenv('DISCORD_CLIENT_ID')
+DISCORD_CLIENT_SECRET=os.getenv('DISCORD_CLIENT_SECRET')
 
 load_dotenv()
 
@@ -46,6 +50,7 @@ INSTALLED_APPS = [
     'discord_integration',
     'feedback',
     'users',
+    'members',
     'rest_framework',
 ]
 
