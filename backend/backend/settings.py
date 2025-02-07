@@ -17,10 +17,14 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 CREDENTIALS_FILE = BASE_DIR / 'credentials.json'
+
 DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI') # Discord redirect URI
 DISCORD_LOGIN_URL = os.getenv('DISCORD_URL') # Discord API URL
 DISCORD_CLIENT_ID=os.getenv('DISCORD_CLIENT_ID')
 DISCORD_CLIENT_SECRET=os.getenv('DISCORD_CLIENT_SECRET')
+DISCORD_SERVER_ID=os.getenv('DISCORD_SERVER_ID')
+
+DISCORD_ROLE_ID=os.getenv('DISCORD_ROLE_ID')
 
 load_dotenv()
 
@@ -56,7 +60,7 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'discord_integration.auth.DiscordBackend',
+    'users.auth.DiscordBackend',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +72,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'middleware.restrict_access.AdminAuthMiddleware', # Access restriction middleware
     'middleware.restrict_access.HRAdminMiddleware', # Access restriction middleware
 ]
 

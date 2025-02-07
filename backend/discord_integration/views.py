@@ -1,7 +1,7 @@
 from django.shortcuts import redirect 
 from django.conf import settings
 from django.http import JsonResponse
-from django.contrib.auth import authenticate, authenticate, login
+from django.contrib.auth import authenticate 
 import requests
 
 def discord_login(request):

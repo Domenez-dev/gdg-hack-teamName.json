@@ -1,7 +1,4 @@
 from django.db import models
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission, Group
 
 
@@ -12,6 +9,20 @@ class Department(models.TextChoices):
     VISUALS = 'VIS', 'visuals'
     LOGISTICS = 'LOG', 'Logistics'
     EXTERNAL_RELATIONS = 'RLX', 'External Relations'
+
+class DiscordUser(models.Model):
+    id = models.CharField(max_length=50, primary_key=True)
+    username = models.CharField(max_length=50)
+    discriminator = models.CharField(max_length=4)
+    avatar = models.CharField(max_length=100)
+    email = models.EmailField()
+    verified = models.BooleanField()
+    mfa_enabled = models.BooleanField()
+    flags = models.IntegerField()
+    public_flags = models.IntegerField()
+
+    def __str__(self):
+        return str(self.username)
 
 
 class CustomUserManager(BaseUserManager):
