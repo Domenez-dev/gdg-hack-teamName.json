@@ -1,5 +1,6 @@
 
 from django.db import models
+from users.models import Department
 
 class Member(models.Model):
     id = models.AutoField(primary_key=True)
@@ -9,7 +10,12 @@ class Member(models.Model):
     joined_date = models.DateTimeField(auto_now_add=True)
     engagement_zone = models.CharField(max_length=255, default='General')  # Default value
     monthly_score = models.IntegerField(default=0)  # Default score is 0
+    department = models.ForeignKey(Department, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return str(self.name)
 
+class Badge(models.Model):
+    id = models.AutoField(models.Model, primary_key=True)
+    name = models.CharField(max_length=255)
+    member_id = models.ForeignKey(Member, on_delete=models.CASCADE)
