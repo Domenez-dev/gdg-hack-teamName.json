@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 
-from backend.users.models import Department
+from users.models import CustomUserManager, Department
 
 # class AdminAuthMiddleware:
 #     def __init__(self, get_response):
