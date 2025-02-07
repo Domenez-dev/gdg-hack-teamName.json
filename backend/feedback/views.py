@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 
 @method_decorator(csrf_exempt, name='dispatch')
 class SendFeedbackView(APIView):
-    permission_classes = [IsAuthenticated]
+   # permission_classes = [IsAuthenticated]
 
     def post(self, request):
         recipient_email = request.data.get('email')
