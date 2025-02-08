@@ -1,7 +1,5 @@
 import LeaderBoard from "../components/LeaderBoard";
 import MemberList from "../components/Member-list";
-
-import AddNewForm from "../components/Add";
 import { useState } from "react";
 
 import LeftSidebar from "../components/LeftSidebar";
