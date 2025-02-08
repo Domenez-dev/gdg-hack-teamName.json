@@ -1,31 +1,45 @@
+import { useState, useEffect } from "react";
 import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
+import {Link } from 'react-router-dom';
 
 function MemberList() {
-  const data = [
-    { name: "Alice", points: 100, engagement: "Active", department: "HR", role: "Manager", badge: "Gold" },
-    { name: "Bob", points: 50, engagement: "Inactive", department: "IT", role: "Developer", badge: "CO-Manager,CO-EX,LEAD" },
-  ];
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/members");
+        const data = await response.json();
+        setMembers(data);
+      } catch (error) {
+        console.error("Error fetching members:", error);
+        // Use the sample data as fallback if fetch fails
+        setMembers(membersData);
+      }
+    };
+    
+    fetchMembers();
+  }, []);
 
   const columns = [
     { accessorKey: "name", header: "Name" },
-    { accessorKey: "points", header: "Points" },
-    { accessorKey: "engagement", header: "Engagement" },
+    { accessorKey: "monthlytScore", header: "Points" },
+    { accessorKey: "engagementZone", header: "Engagement" },
     { accessorKey: "department", header: "Department" },
     { accessorKey: "role", header: "Role" },
-    { accessorKey: "badge", header: "Badge" },
+    { accessorKey: "badge", header: "Badge" }
   ];
 
   const table = useReactTable({
-    data,
+    data: members,  // Changed from 'members' to 'data'
     columns,
-    getCoreRowModel: getCoreRowModel(),
+    getCoreRowModel: getCoreRowModel()
   });
 
   return (
-    <div className="p-6 max-w-8xl mx-auto  ">
-      <h2 className="text-2xl text-left italic mb-4 ">Member's List</h2>
+    <div className="p-6 max-w-8xl mx-auto">
+      <h2 className="text-2xl text-left italic mb-4">Member's List</h2>
 
- 
       <div className="space-y-2">
         {/* HEADER */}
         <div className="grid grid-cols-6 font-semibold text-gray-600 text-sm py-2 border-b">
@@ -38,24 +52,33 @@ function MemberList() {
         </div>
 
         {/* LISTE DES MEMBRES */}
-        {table.getRowModel().rows.map((row) => (
+        {members.length > 0 && table.getRowModel().rows.map((row) => (
+          <Link to="Member">
           <div key={row.id} className="grid grid-cols-6 items-center py-3 bg-white shadow-sm rounded-lg px-4">
-            <p className="font-medium text-gray-400">{row.getValue("name")}</p>
-            <p className="text-gray-700">{row.getValue("points")}</p>
-            <p className={`font-semibold ${row.getValue("engagement") === "Active" ? "text-green-500" : "text-red-500"}`}>
-              {row.getValue("engagement")}
+            <p className="font-medium text-gray-700">{row.original.name}</p>
+            <p className="text-gray-700">{row.original.monthlytScore}</p>
+            <p className={`font-semibold ${
+              row.original.engagementZone === "Active" ? "text-green-500" : "text-red-500"
+            }`}>
+              {row.original.engagementZone}
             </p>
-            <p className="text-gray-700">{row.getValue("department")}</p>
-            <p className=" text-gray-700 px-2 py-1 pr-[100px] text-center">{row.getValue("role")}</p>
+            <p className="text-gray-700">{row.original.department}</p>
+            <p className="text-gray-700 px-2 py-1 pr-[100px] text-center">{row.original.role}</p>
             <div className="flex flex-wrap gap-1">
-            {row.getValue("badge").split(",").map((badge, index) => (
+              {row.original.badge?.split(",").map((badge, index) => (
                 <p key={index} className="bg-blue-100 text-blue-600 px-2 py-1 rounded-md text-center">
                   {badge.trim()}
                 </p>
               ))}
             </div>
-          </div>
+          </div></Link>
         ))}
+
+        {members.length === 0 && (
+          <div className="text-center py-4 text-gray-500">
+            No members found
+          </div>
+        )}
       </div>
     </div>
   );

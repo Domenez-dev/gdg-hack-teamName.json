@@ -1,5 +1,5 @@
 import { LayoutGrid, Search, Edit, LogOut } from 'lucide-react';
-
+import {Link } from 'react-router-dom';
 import logo from "../assets/images/logo.png";
 const Sidebar = () => {
   return (
@@ -15,9 +15,10 @@ const Sidebar = () => {
         <button className="text-white/50 hover:bg-white/10 p-2 rounded-lg">
           <Search className="w-6 h-6" />
         </button>
+        <Link to="/Events">
         <button className="text-white/50 hover:bg-white/10 p-2 rounded-lg">
           <Edit className="w-6 h-6" />
-        </button>
+        </button></Link>
       </div>
       
       <div className="mt-auto mb-4">

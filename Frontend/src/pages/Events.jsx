@@ -1,34 +1,48 @@
 import { Plus, Calendar, Users } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LeftSidebar from "../components/LeftSidebar";
 import AddEvent from '../components/AddEvent';
 
 const Timeline = () => {
   const [showAddEvent, setShowAddEvent] = useState(false);
+  const [events, setEvents] = useState([]);
   
-  const events = [
-    {
-      id: 1,
-      title: 'GDG HACK',
-      type: 'EVENT',
-      description: 'GDG Hack is An event that specializes in making things that are something',
-      date: '11/05/2025',
-      isActive: true,
-      icon: 'event'
-    },
-    {
-      id: 2,
-      title: 'GDG Organizers',
-      type: 'Project',
-      description: 'GDG Hack is An event that specializes in making things that are something',
-      date: '02/04/2025',
-      isActive: false,
-      icon: 'project'
-    }
-  ];
+  // const events = [
+  //   {
+  //     id: 1,
+  //     title: 'GDG HACK',
+  //     type: 'EVENT',
+  //     description: 'GDG Hack is An event that specializes in making things that are something',
+  //     date: '11/05/2025',
+  //     isActive: true,
+  //     icon: 'event'
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'GDG Organizers',
+  //     type: 'Project',
+  //     description: 'GDG Hack is An event that specializes in making things that are something',
+  //     date: '02/04/2025',
+  //     isActive: false,
+  //     icon: 'project'
+  //   }
+  // ];
 
-  const getIcon = (iconType) => {
-    switch(iconType) {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await fetch("http://localhost:8000/events");
+      const data = await response.json();
+      setEvents(data);
+      console.log(data, "data in useEffect");
+    };
+    fetchEvents();
+  }, [])
+
+  console.log(events, "data from events state");
+
+
+  const getIcon = (eventType) => {
+    switch(eventType) {
       case 'event':
         return <Calendar className="w-6 h-6 text-white" />;
       case 'project':
@@ -43,13 +57,13 @@ const Timeline = () => {
       <LeftSidebar />
       <div className="flex-1 ml-16 p-6">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-xl font-semibold">Events & Projects</h1>
+          <h1 className="text-3xl font-bold">Events & Projects</h1>
           <button 
             onClick={() => setShowAddEvent(true)}
-            className="bg-black text-white px-3 py-1.5 cursor-pointer rounded-lg text-sm flex items-center gap-1"
+            className="bg-black text-white text-justify px-3 py-1.5 cursor-pointer rounded-lg text-sm flex items-center gap-1 w-32"
           >
-            <Plus className="w-4 h-4" />
-            New
+            <Plus className="w-4 h-4 text-2x1 text-center" />
+            <span className="text-center w-full">New</span>
           </button>
         </div>
 
@@ -69,13 +83,13 @@ const Timeline = () => {
                   event.isActive ? 'bg-green-500 text-white' : 'bg-gray-700 text-white'
                 }`}>
                   <div className="bg-white/20 p-2 rounded">
-                    {getIcon(event.icon)}
+                    {getIcon(event.type)}
                   </div>
                   
                   <div className="flex-grow">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-bold">{event.title}</h3>
+                        <h3 className="font-bold">{event.name}</h3>
                         <p className="text-sm opacity-80">{event.type}</p>
                       </div>
                       <div className="text-right space-y-1">

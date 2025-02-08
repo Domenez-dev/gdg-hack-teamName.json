@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from 'react';
 import { LineChart, Line } from 'recharts';
 
 import {  YAxis, CartesianGrid } from 'recharts';
@@ -12,6 +13,21 @@ const chartData = [
   ];
 
 const LeaderBoard = () => {
+  
+  const [scores, setScores] = useState([]);
+  useEffect(() => {
+      const fetchEvents = async () => {
+        const response = await fetch("http://localhost:8000/scores");
+        const data = await response.json();
+        setScores(data);
+        console.log(data, "data in useEffect");
+      };
+      fetchEvents();
+    }, [])
+  
+    console.log(scores, "data from events state");
+  
+  
   const leaders = [
     { 
       id: 1, 

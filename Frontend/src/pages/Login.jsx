@@ -1,11 +1,13 @@
 import React from 'react';
 import gdg from "../assets/images/gdg.png";
 import logo from "../assets/images/logo.png";
+import {Link, useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const Login = () => {
+  const navigate=useNavigate()
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-lg text-center w-96 relative">
+    <div className="flex items-center justify-center h-screen ">
+      <div className="bg-white p-8 rounded-2xl  text-center w-96 relative">
         {/* Top-right small logo */}
         <img src={gdg} alt="gdg club logo" className="absolute top-4 right-4 w-12 h-12" />
         
@@ -18,6 +20,7 @@ const LoginPage = () => {
         
         {/* Discord Login Button */}
         <div className="flex justify-center mt-8">
+        <Link to= "/"> 
           <button className="flex items-center justify-center w-40 bg-blue-700 text-white px-4 py-3 rounded-xl shadow hover:bg-blue-800 transition gap-2">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -32,11 +35,11 @@ const LoginPage = () => {
               />
             </svg>
             <span className="text-lg font-medium">Login</span>
-          </button>
+          </button></Link> 
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default Login;

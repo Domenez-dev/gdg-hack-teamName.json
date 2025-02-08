@@ -1,0 +1,91 @@
+{
+    "members": [
+        {
+            "name": "Cerine",
+            "email": "maroua@gmail.com",
+            "engagementZone": "Active",
+            "department": "HR",
+            "joinedDate":"4/5/2022",
+            "monthlytScore":"1500",
+            "discord":"cerine.gm",
+            "role": "MEMBER",
+            "badge": "Ex-CO-Manager"
+        },
+        {
+            "name": "Maroua",
+            "email":  "maroua@gmail.com",
+            "engagementZone": "Inactive",
+            "department": "Development",
+            "joinedDate":"4/4/2023",
+            "monthlytScore":"900",
+            "discord":"cerine.gm",
+            "role": "Manager",
+            "badge":" Ex-CO-Manager"
+        },
+        {
+            "name": "Noor",
+            "email": "maroua@gmail.com",
+            "engagementZone": "Active",
+            "department": "Multimedia",
+            "joinedDate":"13/9/2021",
+            "monthlytScore":"1200",
+            "discord":"cerine.gm",
+            "role": "Manager",
+            "badge": " Ex-CO-Manager"
+        }
+    ],
+    "events": [
+        {
+            "name": "GDG Hack",
+            "type": "project",
+            "description": "A large-scale hackathon for developers.",
+            "date": "06/06/2025",
+            "isActive":true
+        },
+        {
+            "name": "DevFest",
+            "type": "event",
+            "description": "Annual technology conference featuring keynote speakers and workshops.",
+            "date": "15/06/2025",
+            "isActive":false
+        },
+        {
+            "name": "GHack",
+            "type": "event",
+            "description": "A training camp for young entrepreneurs to develop their ideas.",
+            "date": "10/07/2025",
+            "isActive":false
+
+        }
+    ],
+    "scores":[
+        {
+            "month":1,
+            "year":2022,
+            "score":100,
+            "username":"nnor.gg",
+            "category":"DEV"
+        },
+        {
+            "month":1,
+            "year":2022,
+            "score":10,
+            "username":"cerine.gm",
+            "category":"COMM"
+        },
+        {
+            "month":1,
+            "year":2022,
+            "score":14,
+            "username":"maroua.zi",
+            "category":"COMM"
+        },
+        {
+            "month":1,
+            "year":2022,
+            "score":1200,
+            "username":"hinde.tti",
+            "category":"Design"
+        }
+    ]
+}
