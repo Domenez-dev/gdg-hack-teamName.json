@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Event, Contribution
+from .models import Event, Contribution, Score, ScoreHistory
 #from members.models import Member
 from users.models import Department
 
@@ -23,3 +23,13 @@ class ContributionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contribution
         fields = ['id', 'event', 'user', 'task_name', 'weight', 'submited_on']
+
+class ScoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Score
+        fields = '__all__'
+
+class ScoreHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScoreHistory
+        fields = '__all__'
