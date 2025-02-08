@@ -3,8 +3,8 @@ import logo from "../assets/images/logo.png";
 
 const LoginPage = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-lg text-center w-96 relative">
+    <div className="flex items-center justify-center h-screen ">
+      <div className="bg-white p-8 rounded-2xl  text-center w-96 relative">
         {/* Top-right small logo */}
         <img src={gdg} alt="gdg club logo" className="absolute top-4 right-4 w-12 h-12" />
         
